@@ -1,0 +1,741 @@
+
+
+import java.util.*;
+public class music_shop
+{
+    //master file
+
+    int m_id[]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,0,0,0,0};
+    String m_cat[]={"Percussion","Percussion","Percussion","Percussion","Percussion","Strings   ","Strings   ","Strings   ","Strings   ","Strings   ","Wind      ","Wind      ","Wind      ","Electronic","Electronic","          ","          ","          ","          ","          "};
+    String m_subcat[]={"Indian ","Indian ","Indian ","Western","Western","Indian ","Indian ","Indian ","Western","Western","Indian ","Western","Western","Western","Western","       ","       ","       ","       ","       "};
+    String m_names[]={"Tabla       ","Dholak      ","Pakhawaj    ","Drums       ","Bongo       ","Sitar       ","Violin      ","Sarod       ","Guitar      ","Piano      ","Flute      ","Saxophone   ","Clarinet    ","Keyboard    ","Octapad     ","            ","            ","            ","            ","            "};
+    int m_qty[]={18,20,10,5,9,5,20,5,25,2,50,5,5,20,5,0,0,0,0,0};
+    int m_cost[]={3000,3000,6000,50000,5000,15000,10000,30000,8000,50000,2000,20000,15000,25000,50000,0,0,0,0,0};
+    char m_remove[]={'N','N','N','N','N','N','N','N','N','N','N','N','N','N','N',0,0,0,0,0};
+
+    int midno = 16;
+    int midind = 15;
+
+    //transaction file
+    int t_cid[]={1,2,3,0,0,0,0,0,0,0};
+    int t_m_id[]={1,2,9,0,0,0,0,0,0,0};
+    String t_m_cat[]={"Percussion","Percussion","Strings   ","          ","          ","          ","          ","          ","          ","          "};
+    String t_m_subcat[]={"Indian ","Western","Western","       ","       ","       ","       ","       ","       ","       "};
+    String t_m_names[]={"Tabla       ","Bongo       ","Guitar      ","","","","","","",""};
+    int t_qty[]={2,1,5,0,0,0,0,0,0,0};
+    int t_amt[]={6000,5000,40000,0,0,0,0,0,0,0};
+    double t_gst[]={600,500,4000,0,0,0,0,0,0,0};
+    double t_bill[]={6600,5500,44000,0,0,0,0,0,0,0};
+
+    int custno=4;
+    int custind=3;
+
+    int again = 0 ;
+    int out = 0 ;
+
+    Scanner in=new Scanner(System.in);
+
+    public static void main()
+    {
+        music_shop ob=new music_shop();
+
+        int ch=0;
+
+        do
+        {
+            ob.out = 0;
+            System.out.println("\f");
+
+            System.out.println("\t\t\t\t\t\t\t~~~MMMMMMM     MMMMMM  HH       HH~~~");
+            System.out.println("\t\t\t\t\t\t\t~~~MMM    MM MM    MM  HH       HH~~~");
+            System.out.println("\t\t\t\t\t\t\t~~~MMM     MMM     MM  HH       HH~~~");
+            System.out.println("\t\t\t\t\t\t\t~~~MMM     MMM     MM  HHHHHHHHHHH~~~");
+            System.out.println("\t\t\t\t\t\t\t~~~MMM     MMM     MM  HH       HH~~~");
+            System.out.println("\t\t\t\t\t\t\t~~~MMM             MM  HH       HH~~~");
+
+            System.out.println("");
+            System.out.println("\t\t\t\t\t\t\t           MUSIC--HUB");
+            System.out.println("\t\t\t\t\t\t\t           Shop No.27");
+            System.out.println("\t\t\t\t\t\t\t           2nd Floor");
+            System.out.println("\t\t\t\t\t\t\t           Orion Mall");
+            System.out.println("\t\t\t\t\t\t\t       Powai,Mumbai-400076");
+
+            System.out.println("");
+
+            System.out.println("\t\t\t\t\t\t\t******WELCOME TO THE MUSIC-HUB******");
+
+            System.out.println();
+
+            ob.calendar();
+
+
+            System.out.println("");
+            
+            System.out.println("\t\t\t\t\t\t\t ____________________________");
+            System.out.println("\t\t\t\t\t\t\t | 1.Enquiry                 |");
+            System.out.println("\t\t\t\t\t\t\t | 2.Sales                   |");
+            System.out.println("\t\t\t\t\t\t\t | 3.Product Addition        |");
+            System.out.println("\t\t\t\t\t\t\t | 4.Product Removal         |");
+            System.out.println("\t\t\t\t\t\t\t | 5.Product Modification    |");
+            System.out.println("\t\t\t\t\t\t\t | 6.Bill                    |");
+            System.out.println("\t\t\t\t\t\t\t | 7.Reports                 |");
+            System.out.println("\t\t\t\t\t\t\t | 8.Exit                    |");
+            System.out.println("\t\t\t\t\t\t\t ____________________________");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.print("\t\t\t\t\t\t\tEnter your choice---->");
+            ch = ob.in.nextInt();
+
+            ob.load();
+
+            switch(ch)
+            {
+                case 1:
+                ob.enq();
+                break;
+
+                case 2:
+                ob.sales();
+                break;
+
+                case 3:
+                ob.addprod();
+                break;
+
+                case 4:
+                ob.remprod();
+                break;
+
+                case 5:
+                ob.modify();
+                break;
+
+                case 6:
+                ob.bill();
+                break;
+
+                case 7:
+                ob.reports();
+                break;
+
+                case 8:
+                ob.out=1;
+                ob.again = 0 ;
+                break;
+
+                default :
+                System.out.println("Invalid choice entered");
+            }
+
+            if(ob.out == 0 )
+            {
+
+                System.out.println("");
+
+                System.out.print("\t\t\tPress 1 to continue---->");
+
+                ob.again = ob.in.nextInt();
+            }
+
+        }while(ob.again == 1 );
+
+        System.out.println("\n\n\t\t\t\t\t\t\tTHANK YOU \n\t\t\t\t\t\t\t       VISIT AGAIN!!!");
+
+        System.exit(0);
+    }
+
+    //Enquiry menu
+    void enq()
+    {
+        int i;
+
+        System.out.println("\f");
+
+        System.out.println("\t=================================================================================================================================================");
+
+        System.out.println("\t\t\t\t\t\t\t\tINSTRUMENT INVENTORY");
+        System.out.println();
+        heading();
+        System.out.println();
+        System.out.println("\tID\tINSTRUMENT CATEGORY\tINSTRUMENT SUBCATEGORY\t INSTRUMENT\t             QUANTITY\t           COST(in Rs.)");
+        for(i=0;i<20;i++)
+        {
+
+            if(m_id[i] > 0 && m_remove[i] == 'N')
+            {
+                System.out.println("\t"+m_id[i]+"\t"+m_cat[i]+"\t\t "+m_subcat[i]+"\t\t "+m_names[i]+"\t\t       "+m_qty[i]+"\t\t      "+m_cost[i]);
+
+            }
+        }
+
+    }
+
+    //Sales Menu
+    void sales()
+    {
+
+        int mid;
+        int i;
+        int qty;
+
+        int salesout =0 ;
+        int salesagain = 0;
+
+        boolean flagid = false;
+        boolean flagqty = false;
+
+        do
+        {
+
+            flagid = false;
+            flagqty = false;
+
+            System.out.println("\f");
+            enq();
+            System.out.println("\n\tCustomer No : "+ custno);
+            System.out.print("\n\tEnter Product id--->");
+            mid=in.nextInt();
+
+            for(i=0;i<m_id.length;i++)
+            {
+
+                if(m_id[i] == mid )
+                {
+                    flagid = true;
+
+                    System.out.print("\n\tEnter qty--->");
+                    qty = in.nextInt();
+
+                    if(m_qty[i]  >= qty)
+                    {
+                        flagqty = true;
+
+                        t_cid[custind] = custno;
+
+                        t_m_id[custind] = mid;
+
+                        t_m_cat[custind] = m_cat[i];
+
+                        t_m_subcat[custind] = m_subcat[i];
+
+                        t_m_names[custind] = m_names[i];
+
+                        t_qty[custind] = qty;
+
+                        t_amt[custind] = m_cost[i] * qty;
+
+                        t_gst[custind] = t_amt[custind] * 0.10;
+
+                        t_bill[custind] = t_amt[custind] + t_gst[custind];
+
+                        m_qty[i] = m_qty[i] - qty;
+
+                        custind++;
+
+                        break;
+                    }
+
+                    else
+                    {
+                        System.out.println("\n\tInsufficient qty");
+                    }
+
+                }
+            }
+
+            if(flagid == false)
+            {
+                System.out.println("\n\n\tInvalid id!!");
+            }
+
+            System.out.print("\n\tPress 1 to shop again and any other number to exit--->");
+            salesagain = in.nextInt();
+
+        }while(salesagain == 1 );
+
+        if(flagid==true && flagqty == true)
+        {
+            custno++;
+        }
+
+        out = 1;
+        again = 1;
+
+    }
+
+    //Product addition Menu
+    void addprod()
+    {
+        String cat;
+        String subcat;
+        String name;
+        int qty;
+        int cost;
+        int len;
+        int x;
+
+        int confirm;
+        boolean flag = false;
+
+        System.out.println("\f");
+
+        System.out.println("\t========================================================================================================================");
+
+        System.out.println("\t\t\t\t\t\t\t      PRODUCT ADDITION MENU");
+
+        System.out.println();
+
+        heading();
+
+        System.out.println("\n\n\t\t\tYour id is --> " + midno);
+
+        System.out.print("\n\t\t\tEnter Category:");
+        cat = in.next();
+        in.nextLine();
+        len=cat.length();
+        for(x=len;x<10;x++)
+        {
+            cat=cat+" ";
+        }
+
+        System.out.print("\n\t\t\tEnter Sub-category:");
+        subcat=in.next();
+        in.nextLine();
+        len=subcat.length();
+        for(x=len;x<7;x++)
+        {
+            subcat=subcat+" ";
+        }
+
+        System.out.print("\n\t\t\tEnter the instrument name:");
+        name = in.nextLine();
+        len=name.length();
+        for(x=len;x<12;x++)
+        {
+            name=name+" ";
+        }
+
+        System.out.print("\n\t\t\tEnter the Quantity:");
+        qty = in.nextInt();
+
+        System.out.print("\n\t\t\tEnter the Cost:");
+        cost = in.nextInt();
+
+        System.out.print("\n\t\t\tPress 1 to confirm:");
+        confirm = in.nextInt();
+
+        if(confirm == 1)
+        {
+            m_id[midind] = midno;
+
+            m_cat[midind] = cat;
+
+            m_subcat[midind]=subcat;
+
+            m_names[midind] = name;
+
+            m_qty[midind] = qty;
+
+            m_cost[midind] = cost;
+
+            m_remove[midind] = 'N';
+
+            flag = true;
+
+            midind++;
+            midno++;
+
+            System.out.println("\n\t\t\tProduct is sucessfully added");
+        }
+
+        else
+        {
+            System.out.println("\n\t\t\tYour product not added");
+        }
+
+    }
+
+    //Product removal menu
+    void remprod()
+    {
+        int mid;
+        int i;
+        int confirm;
+        boolean flag = false;
+
+        enq();
+
+        System.out.print("\n\n\t\t\tEnter product ID to be removed-->");
+        mid = in.nextInt();
+
+        System.out.print("\n\t\t\tPress 1 to confirm-->");
+        confirm=in.nextInt();
+
+        if(confirm==1)
+        {
+            for(i=0;i<m_id.length;i++)
+            {
+                if(m_id[i] == mid)
+                {
+                    flag = true;
+                    m_remove[i] = 'Y';
+
+                    System.out.println("\n\n\t\t\tProduct removed successfully");
+                }
+            }
+
+            if(flag == false)
+            {
+                System.out.println("\n\t\t\tWrong id entered");
+            }
+        }
+
+        else 
+        {
+            System.out.println("\n\t\t\tProduct not removed ");
+        }
+
+    }
+
+    //Product Modification menu
+    void modify()
+    {
+        int c;
+        int modout=0;
+        int modagain=0;
+
+        do
+        {
+            System.out.println("\f");
+
+            System.out.println("\t==========================================================================================================================");
+
+            System.out.println("\t\t\t\t\t\t\t        MODIFICATION MENU");
+
+            System.out.println();
+
+            heading();
+
+            System.out.println();
+
+            System.out.println("\n\n\t1.Modify Cost");
+
+            System.out.println("\t2.Modify Quantity");
+
+            System.out.println("\t3.Exit");
+
+            System.out.print("\tEnter your choice-->");
+
+            c=in.nextInt();
+
+            switch(c)
+            {
+                case 1:
+
+                modcost();
+
+                break;
+
+                case 2:
+
+                modqnt();
+
+                break;
+
+                case 3:
+
+                modout = 1;
+                modagain = 0;
+
+                break;
+
+                default:
+                System.out.println("Invalid Input!!!");
+            }
+            if(modout == 0 )
+            {
+                System.out.print("\n\t\tPress 1 to reamin in MODIFICATION MENU and any other number to exit--->");
+                modagain = in.nextInt();
+            }
+        }while(modagain == 1);
+
+        out=1;
+        again=1;
+    }
+
+    //Billing menu
+    void bill()
+    {
+        int i;
+        double gtot = 0;
+        int cid;
+        int x = 0;
+
+        System.out.println("\f");
+
+        System.out.println("\t\t\t\t\t\t------BILL-----");
+
+        System.out.println("");
+        System.out.println("");
+
+        System.out.print("Enter customer no --> ");
+        cid = in.nextInt();
+
+        System.out.println("\f");
+
+        System.out.println("\t==================================================================================================================================");
+        System.out.println("\t\t\t\t\t\t\t          ------BILL------ \n\n");
+
+        System.out.println("");
+
+        System.out.println("\t\t\t\t\t\t\t           MUSIC--HUB");
+        System.out.println("\t\t\t\t\t\t\t           Shop No.27");
+        System.out.println("\t\t\t\t\t\t\t           2nd Floor");
+        System.out.println("\t\t\t\t\t\t\t           Orion Mall");
+        System.out.println("\t\t\t\t\t\t\t       Powai,Mumbai-400076");
+
+        System.out.println();
+
+        calendar();
+
+        System.out.println();
+        System.out.println();
+
+        for(i=0;i<t_cid.length;i++)
+        {
+
+            if(t_cid[i] == cid)
+            {
+
+                if(x==0)
+                {
+                    System.out.println("\t\t\tCustomer No : " + cid+"\n\n");
+                    System.out.println("\t\t\tID\tCATEGORY\tSUB-CATEGORY\t  NAME\t\tQTY\tAMT\tGST\tBILL");
+                    x++;
+                }
+
+                System.out.println("\t\t\t"+t_m_id[i]+"\t"+t_m_cat[i]+"\t"+t_m_subcat[i]+"\t          "+t_m_names[i]+"\t"+t_qty[i]+"\t"+t_amt[i]+"\t"+t_gst[i]+"\t"+t_bill[i]); 
+
+                gtot = gtot + t_bill[i];
+            }
+
+        }
+        System.out.println("\n\t\t\tTotal Bill Amount  ---------- > " + gtot );
+        System.out.println("\n\n\t==================================================================================================================================");
+    }
+    //Reports Menu
+    void reports()
+    {
+
+        int reportout = 0;
+        int reportagain = 0;
+        int reportch;
+
+        do
+        {
+            System.out.println("\f");
+
+            System.out.println("\t========================================================================================================================");
+            System.out.println("\t\t\t\t\t\t\t          REPORTS MENU");
+
+            System.out.println();
+
+            heading();
+
+            System.out.println();
+
+            System.out.println("\t\t\t\t1. Total Earnings");
+
+            System.out.println("\t\t\t\t2. Exit");
+
+            System.out.print("\t\t\t\tEnter your choice --> ");
+            reportch = in.nextInt();
+
+            switch(reportch)
+            {
+                case 1 :
+                earnings();
+                break;
+
+                case 2 :
+                reportout = 1;
+                reportagain = 0;
+
+                break;
+
+                default :
+                System.out.println("Invalid choice entered");
+            }
+
+            if(reportout == 0 )
+            {
+                System.out.print("\tPress 1 to reamin in REPORT MENU:");
+                reportagain = in.nextInt();
+            }
+
+        }while(reportagain == 1);
+
+        out = 1;
+        again = 1;
+
+    }
+
+    //Reports Menu-Total Earnings fucntion
+    void earnings()
+    {
+        int i;
+        double gtot = 0;
+
+        System.out.println("\f");
+
+        System.out.println("\t=====================================================================================================================");
+        System.out.println("\t\t\t\t\t\t\t        TOTAL EARNINGS REPORT\n\n");
+
+        
+
+        heading();
+
+        System.out.println();
+
+        System.out.println("\tCID\tID\tCategory\t        Sub-Category\t    Instrument\t                  Qty\t  Amount\tGST\t     BILL");
+        for(i=0;i<t_cid.length;i++)
+        {
+            if(t_cid[i] > 0)
+            {
+
+                System.out.println("\t"+t_cid[i]+"\t"+t_m_id[i]+"\t"+t_m_cat[i]+"\t         "+t_m_subcat[i]+"\t       "+t_m_names[i]+"\t          "+t_qty[i]+"\t  "+t_amt[i] +"\t       "+t_gst[i]+"\t    "+t_bill[i]); 
+                gtot = gtot + t_bill[i];
+            }
+        }
+
+        System.out.println("\n\tTotal Earnings ---------- > " + gtot );
+    }
+
+    //Product Modification menu-Cost modification function 
+    void modcost()
+    {
+        int mid;        
+        int i;        
+        int nc;
+        int c;
+        boolean flag=false; 
+
+        enq();
+
+        System.out.print("\n\n\t\tEnter the product ID-->");        
+        mid=in.nextInt();
+
+        for(i=0;i<m_id.length;i++)
+        {            
+            if(m_id[i]==mid)
+            {
+                flag=true;    
+
+                System.out.print("\n\t\tEnter the new cost-->");                
+                nc=in.nextInt();
+
+                System.out.print("\n\t\tPress 1 to confirm-->");
+                c=in.nextInt();
+
+                if(c==1)
+                {
+                    m_cost[i]=nc;
+
+                    System.out.println("\n\t\tCost modified succesfully");
+                }
+
+                else
+                {
+                    System.out.println("\n\t\tNew cost not updated!!");
+
+                }
+            }
+        }
+
+        if(flag==false)
+        {
+            System.out.println("\n\t\tWrong ID entered!!");
+        }
+
+    }
+
+    //Product Modification Menu-Quantity modification function
+    void modqnt()
+    {
+        int mid;        
+        int i;        
+        int nc;
+        int c;
+        boolean flag=false; 
+
+        enq();
+
+        System.out.print("\n\n\t\tEnter the product ID-->");        
+        mid=in.nextInt();
+
+        for(i=0;i<m_id.length;i++)
+        {            
+            if(m_id[i]==mid)
+            {
+                flag=true;    
+
+                System.out.print("\n\t\tEnter the new quantity-->");                
+                nc=in.nextInt();
+
+                System.out.print("\n\t\tPress 1 to confirm-->");
+                c=in.nextInt();
+
+                if(c==1)
+                {
+                    m_qty[i]=nc;
+
+                    System.out.println("\n\t\tQuantity modified succesfully");
+                }
+
+                else
+                {
+                    System.out.println("\n\t\tNew cost not updated!!");
+
+                }
+            }
+        }
+    }
+
+    //Loading fuction
+    void load()
+    {
+        int i;
+        long j;
+
+        System.out.println("");
+        System.out.print("\t\t\t\t\t\t\tLOADING");
+
+        for(i=0;i<=10;i++)
+        {
+            System.out.print(" .");
+            for(j=0;j<=300000000;j++)
+            {}
+        }
+    }
+
+    void heading()
+    {
+        System.out.println("\t\t\t\t\t\t\t           MUSIC--HUB");
+        System.out.println("\t\t\t\t\t\t\t           Shop No.27");
+        System.out.println("\t\t\t\t\t\t\t           2nd Floor");
+        System.out.println("\t\t\t\t\t\t\t           Orion Mall");
+        System.out.println("\t\t\t\t\t\t\t       Powai,Mumbai-400076");
+
+    }
+
+    void calendar()
+    {
+        Calendar c = Calendar.getInstance(); 
+        System.out.println("\t\t\t\t\t\t\tDate :" + c.getTime()); 
+    }
+
+    
+    
+
+}
